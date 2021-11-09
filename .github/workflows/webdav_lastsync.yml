@@ -21,4 +21,4 @@ jobs:
           WEBDAV_EMAIL: ${{ secrets.WEBDAV_EMAIL }}
           WEBDAV_DAVPASS: ${{ secrets.WEBDAV_DAVPASS }}
 
-    branches: [ main ]
+
