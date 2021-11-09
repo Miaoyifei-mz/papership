@@ -1,0 +1,24 @@
+# This is a basic workflow to help you get started with Actions
+
+name: webdav_lastsync
+
+on:
+  schedule:
+    - cron: '0 4,16 * * *'
+  workflow_dispatch:
+
+jobs:
+  fix:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Fix
+        run: |
+          export SYNCFILE="lastsync.txt"
+          export REMOTEFILE="https://app.koofr.net/dav/Koofr/zotero/${SYNCFILE}"
+          touch ${SYNCFILE}
+          curl -u ${KOOFR_EMAIL}:${KOOFR_DAVPASS} -T ${SYNCFILE} ${REMOTEFILE}
+        env:
+          KOOFR_EMAIL: ${{ secrets.KOOFR_EMAIL }}
+          KOOFR_DAVPASS: ${{ secrets.KOOFR_DAVPASS }}
+
+    branches: [ main ]
